@@ -26,7 +26,7 @@ INSERT INTO products (item_id, product_name, department_name, price, stock_quant
 Values (1490, "Couch", "Furniture", 500, 25);
 
 INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-Values (1435, "Dresser", "Furniture", 145, 50);
+Values (1435, "Dresser", "Furniture", 145);
 
 INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
 Values (1222, "Jacket", "Clothing", 75, 50);
