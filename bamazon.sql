@@ -4,41 +4,43 @@ CREATE DATABASE bamazonDB;
 USE bamazonDB;
 
 CREATE TABLE products(
-    id NOT NULL AUTO_INCREMENT,
-    item_id INT NULL,
-    product_name VARCHAR NULL,
-    department_name VARCHAR NULL,
+    id INT NOT NULL AUTO_INCREMENT,
+    item_id VARCHAR NULL,
+    product_name VARCHAR(20) NULL,
+    department_name VARCHAR(20) NULL,
     price INT NULL,
-    stock_quantity INT default 50,
+    stock_quantity INT default 50 NULL,
     primary key(id)
 ); 
 
 INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-Values (1742, "Game System", "Electronics", 250);
+Values ("1742", "Game System", "Electronics", 250, 15);
 
 INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-Values (1754, "Headphones", "Electronics", 100, 20);
+Values ("1754", "Headphones", "Electronics", 100, 20);
 
 INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-Values (1792, "Laptop", "Electronics", 800, 100);
+Values ("1792", "Laptop", "Electronics", 800, 100);
 
 INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-Values (1490, "Couch", "Furniture", 500, 25);
+Values ("1490", "Couch", "Furniture", 500, 25);
 
 INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-Values (1435, "Dresser", "Furniture", 145);
+Values ("1435", "Dresser", "Furniture", 145, 80);
 
 INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-Values (1222, "Jacket", "Clothing", 75, 50);
+Values ("1222", "Jacket", "Clothing", 75, 50);
 
 INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-Values (1289, "Jeans", "Clothing", 45, 25);
+Values ("1289", "Jeans", "Clothing", 45, 25);
 
 INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-Values (1263, "Shirt", "Clothing", 20, 15);
+Values ("1263", "Shirt", "Clothing", 20, 45);
 
 INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-Values (1110, "Dictionary", "Books", 25, 150);
+Values ("1110", "Dictionary", "Books", 25, 150);
 
 INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-Values (1074, "Fight Club", "Books", 30, 200);
+Values ("1074", "Fight Club", "Books", 30, 45);
+
+SELECT * FROM bamazonDB.products;
