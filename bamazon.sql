@@ -14,33 +14,24 @@ CREATE TABLE products(
 ); 
 
 INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-Values ("1742", "Game System", "Electronics", 250, 15);
-
-INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-Values ("1754", "Headphones", "Electronics", 100, 20);
-
-INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-Values ("1792", "Laptop", "Electronics", 800, 100);
-
-INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-Values ("1490", "Couch", "Furniture", 500, 25);
-
-INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-Values ("1435", "Dresser", "Furniture", 145, 80);
-
-INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-Values ("1222", "Jacket", "Clothing", 75, 50);
-
-INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-Values ("1289", "Jeans", "Clothing", 45, 25);
-
-INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-Values ("1263", "Shirt", "Clothing", 20, 45);
-
-INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-Values ("1110", "Dictionary", "Books", 25, 150);
-
-INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-Values ("1074", "Fight Club", "Books", 30, 45);
+Values ("1742", "Game System", "Electronics", 250, 15),
+("1754", "TV", "Electronics", 100, 20),
+("1792", "Laptop", "Electronics", 800, 100),
+("1490", "Couch", "Furniture", 500, 25),
+("1435", "Dresser", "Furniture", 145, 80),
+("1222", "Jacket", "Clothing", 75, 50),
+("1289", "Hat", "Clothing", 45, 25),
+("1263", "Shirt", "Clothing", 20, 45),
+("1110", "Dictionary", "Books", 25, 150),
+("1074", "Fight Club", "Books", 30, 45);
 
 SELECT * FROM bamazonDB.products;
+
+
+
+-- inquirer
+--                 .prompt({
+--                     name: "askQuant",
+--                     type: "number",
+--                     message: "How many " + product + "s would you like?"
+--                 })

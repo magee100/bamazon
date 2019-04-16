@@ -23,42 +23,25 @@ var connection = mysql.createConnection({
 // Connect to mysql, display product results and start function
 connection.connect(function(err) {
     if (err) throw err;
+        console.log("Connected!")
+        displayItems();
+    });
 
-    //Select all customers and return the result object:
 
-    // connection.query("SELECT [id], [item_id], [product_name], [department_name], [price], [stock_quantity] FROM products", function (err, result) {
-
-    connection.query("SELECT * FROM products", function (err, result) {
-      if (err) throw err;
-      console.log(result);
+var displayItems = function(){
+    connection.query("SELECT * FROM products", function (err, res) {
+        if (err) throw err;
+        for (var i = 0; i < res.length; i++){
+        console.log(res[i].id + " || " + res[i].item_id + " || " + res[i].product_name + " || " + res[i].price + " || " + res[i].stock_quantity + " || ");
+        } 
        start();
     });
-});
-
-
-// Start function
-// function start() {
-
-// Display table with items in terminal
-
-
-// Run inquirer prompts
-//     inquirer
-//         .prompt({
-//             name: "checkID",
-//             type: "input",
-//             message: "What is the ID of the product? (EX:1156, 1589)"
-//         })    
-// .then(function(answer){
-//     if (answer.checkID === item_id)
-//     })
-// }
-
+}
 
 
 // Start function
 function start() {
-    connection.query("SELECT * FROM products", function(err, results) {
+    connection.query("SELECT * FROM products", function(err, res) {
         if (err) throw err;
 
     inquirer
@@ -66,18 +49,49 @@ function start() {
             {
             name: "checkID",
             type: "rawlist",
-            message: "What is the ID of the product? (EX:1156, 1589)",
+            message: "What is the ID of the product? (Choose from list below)",
             choices: function() {
                 var choiceArray = [];
-                for (var i = 0; i < results.length; i++) {
-                  choiceArray.push(results[i].item_id);
+                for (var i = 0; i < res.length; i++) {
+                  choiceArray.push(res[i].item_id);
                 }
                 return choiceArray;
               },
         }
     ])    
-//  .then(function(answer){
-    
-//      })
-    });
-}
+.then(function(answer){
+    for(var i=0; i< res.length; i++){
+        if (answer.checkID === res[i].item_id){
+            var itemID = res[i].item_id;
+            var item = res[i];
+            var product = res[i].product_name;
+            // console.log("Finally")
+            // console.log(product)
+            // console.log(itemID)
+            console.log(res[i].id + " || " + res[i].item_id + " || " + res[i].product_name + " || " + res[i].price + " || " + res[i].stock_quantity + " || ");
+            inquirer
+                .prompt({
+                    name: "askQuant",
+                    type: "number",
+                    message: "How many " + product + "s would you like?",
+                    validate: function(value) {
+                        if (isNaN(value) === false) {
+                          return true;
+                        }
+                        return false;
+                      }
+                })
+                .then(function(answer){
+                    if ((item.stock_quantity-answer.askQuant)>0){
+                        connection.query(
+                            "'UPDATE products SET stock_quantity=' "+(item.stock_quantity-answer.askQuant) + " 'WHERE product_name=' " + product + "'", function(err,res2){
+                            
+                                displayItems();
+                            })
+                        }
+                    })
+                }
+            }
+        })
+    }
+)}
