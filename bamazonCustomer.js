@@ -1,12 +1,3 @@
-//////---ONGOING ISSUES----//////////
-//--Display tables without RowDataPacket
-//--Determine if item_id is valid
-//--
-//--
-//--
-//--
-//////////////////////////////////////
-
 // Require mysql and inquirer
 var mysql = require("mysql");
 var inquirer = require("inquirer");
@@ -62,12 +53,12 @@ function start() {
 .then(function(answer){
     for(var i=0; i< res.length; i++){
         if (answer.checkID === res[i].item_id){
-            var itemID = res[i].item_id;
             var item = res[i];
+            var ID = res[i].id;
+            var itemID = res[i].item_id;
             var product = res[i].product_name;
-            // console.log("Finally")
-            // console.log(product)
-            // console.log(itemID)
+            var itemStock = res[i].stock_quantity;
+            var price = res[i].price;
             console.log(res[i].id + " || " + res[i].item_id + " || " + res[i].product_name + " || " + res[i].price + " || " + res[i].stock_quantity + " || ");
             inquirer
                 .prompt({
@@ -82,10 +73,11 @@ function start() {
                       }
                 })
                 .then(function(answer){
-                    if ((item.stock_quantity-answer.askQuant)>0){
+                    if ((itemStock-answer.askQuant) > 0){
                         connection.query(
-                            "'UPDATE products SET stock_quantity=' "+(item.stock_quantity-answer.askQuant) + " 'WHERE product_name=' " + product + "'", function(err,res2){
-                            
+
+                            "UPDATE products SET stock_quantity=" + (itemStock-answer.askQuant) + " WHERE id= " + ID, function(err,res){
+                                console.log('\n' + "You just spent $" + (answer.askQuant * price) + "!" +'\n');
                                 displayItems();
                             })
                         }
